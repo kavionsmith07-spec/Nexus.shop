@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Bot | Discord</title>
+  <meta name="description" content="Nexus Bot – Discord moderation, utilities, and premium gold-tier features." />
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="imje.png" />
+
+  <style>
+    :root {
+      --bg-color: #020617;
+      --card-bg: rgba(22, 27, 34, 0.7);
+      --accent-blue: #00d2ff;
+      --text-white: #ffffff;
+      --text-gray: #cbd5e1;
+      --gold-bg: #0b0a05;
+      --gold: #f5c97a;
+      --gold-soft: #d4af37;
+      --gold-card: rgba(30, 25, 10, 0.7);
+    }
+
+    * { box-sizing: border-box; }
+    body, html { margin:0; padding:0; width:100%; min-height:100vh; font-family:'Inter', sans-serif; overflow-x:hidden; scroll-behavior:smooth; }
+
+    .page-section { display: none; min-height: 100vh; }
+    .page-active { display: block; }
+
+    .main-body { background: linear-gradient(120deg, #020617 20%, #1e1b4b 50%, #020617 80%); color: var(--text-white); }
+    #snowCanvas { position: fixed; inset:0; z-index:0; pointer-events:none; }
+
+    .container { position: relative; z-index:5; max-width:900px; margin:auto; padding:60px 20px; }
+    header { text-align:center; margin-bottom:60px; }
+
+    .logo-img { width:110px; height:110px; border-radius:22px; margin-bottom:20px; box-shadow:0 0 35px rgba(0,210,255,0.25); }
+
+    h1 { font-size:3.2rem; margin:0; font-weight:800; }
+    .description { max-width:600px; margin:18px auto 35px; font-size:1.1rem; line-height:1.6; color: var(--text-gray); }
+
+    .btn-group { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+    .btn { padding:14px 30px; border-radius:12px; font-weight:700; text-decoration:none; transition:0.25s ease; display:inline-block; cursor:pointer; border:none; }
+    .btn-invite { background: var(--accent-blue); color:#000; }
+    .btn-community { background: rgba(255,255,255,0.06); color:white; border:1px solid rgba(255,255,255,0.12); }
+    .btn-upgrade-nav { background: linear-gradient(135deg, #f5c97a, #d4af37); color:#000 !important; padding:8px 16px !important; border-radius:8px; }
+    .btn-gold { background: linear-gradient(135deg, #f5c97a, #d4af37); color:#000; }
+    .btn-outline-gold { border:1px solid rgba(245,201,122,0.5); color: var(--gold); }
+    .btn:hover { transform: translateY(-2px); box-shadow:0 8px 30px rgba(0,210,255,0.2); }
+
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin:70px 0; }
+    .stat-card { background: var(--card-bg); backdrop-filter: blur(12px); padding:24px; border-radius:16px; border:1px solid rgba(255,255,255,0.06); text-align:center; }
+    .stat-value { font-size:2.2rem; font-weight:800; }
+    .stat-label { color: var(--accent-blue); font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; }
+
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-bottom:80px; }
+    .feature { background: var(--card-bg); padding:22px; border-radius:16px; border:1px solid rgba(255,255,255,0.06); font-weight:600; text-align:center; }
+
+    .premium-body { background: radial-gradient(circle at top, rgba(245,201,122,0.25), transparent 40%), linear-gradient(135deg, #120f07, #0b0a05); color:#fff7e6; }
+    .gold-text { color: var(--gold); }
+    .premium-card { background: var(--gold-card); border-radius:18px; padding:26px; border:1px solid rgba(245,201,122,0.25); backdrop-filter: blur(12px); transition:0.3s ease; text-align:center; }
+    .premium-card:hover { transform: translateY(-6px); box-shadow:0 15px 45px rgba(245,201,122,0.25); }
+
+    .nav { position:sticky; top:0; z-index:100; backdrop-filter: blur(14px); background: rgba(2,6,23,0.6); border-bottom:1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width:1100px; margin:auto; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; }
+    .nav-logo { font-weight:800; letter-spacing:1px; }
+    .nav-links { display:flex; align-items:center; gap:18px; }
+    .nav-links a { text-decoration:none; color: var(--text-gray); font-weight:600; transition:0.2s; }
+    .nav-links a:hover { color: var(--accent-blue); }
+
+    footer { text-align:center; padding:40px 0; font-size:0.85rem; color: var(--text-gray); opacity:0.75; }
+  </style>
+</head>
+<body>
+
+<div id="mainPage" class="page-section page-active main-body">
+  <canvas id="snowCanvas"></canvas>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">Nexus</span>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a onclick="showPage('premiumPage')" class="btn-upgrade-nav">Upgrade to Premium</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <!-- LOGO -->
+      <img loading="lazy" src="logo.png" alt="Nexus Bot Logo" class="logo-img" />
+      <h1>Nexus Bot</h1>
+      <p class="description">Nexus Bot is your all-in-one Discord companion for moderation, utilities, and powerful community tools — fast, secure, and easy to use.</p>
+
+      <div class="btn-group">
+        <a href="https://discord.com/oauth2/authorize?client_id=1461394221301760263" target="_blank" class="btn btn-invite">Invite Bot</a>
+        <button onclick="showPage('premiumPage')" class="btn btn-gold">⭐ Upgrade to Premium</button>
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="btn btn-community">Join Community</a>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" data-target="345">0</div>
+        <div class="stat-label">Servers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" data-target="2500">0</div>
+        <div class="stat-label">Users</div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="feature">🛡️ Advanced Auto Moderation</div>
+      <div class="feature">⚡ Fast & Reliable Performance</div>
+      <div class="feature">🧩 Custom Commands & Utilities</div>
+      <div class="feature">📊 Server Stats & Analytics</div>
+      <div class="feature">🔒 Anti-Raid & Anti-Spam</div>
+      <div class="feature">💬 Active Support Community</div>
+    </section>
+
+    <footer>
+      © 2026 Nexus Bot. Not affiliated with Discord Inc.
+    </footer>
+  </div>
+</div>
+
+<div id="premiumPage" class="page-section premium-body">
+  <nav class="nav" style="background: rgba(15, 12, 6, 0.7); border-bottom:1px solid rgba(245,201,122,0.2);">
+    <div class="nav-inner">
+      <span class="nav-logo gold-text">NEXUS GOLD</span>
+      <div class="nav-links">
+        <a onclick="showPage('mainPage')" style="cursor:pointer">Free Version</a>
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank">Support</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="gold-text">Nexus Premium</h1>
+    <p class="description" style="color:#d6caa5;">Elite protection. Maximum power. Gold-tier Discord tools.</p>
+
+    <div class="features">
+      <div class="premium-card"><span>👑</span><p>Elite Anti‑Nuke System</p></div>
+      <div class="premium-card"><span>⚡</span><p>Priority Execution Speed</p></div>
+      <div class="premium-card"><span>📊</span><p>Extended Analytics & Logs</p></div>
+      <div class="premium-card"><span>🎨</span><p>Full Premium Customization</p></div>
+      <div class="premium-card"><span>🚀</span><p>Unlimited Commands</p></div>
+      <div class="premium-card"><span>🎟️</span><p>Priority Support Access</p></div>
+    </div>
+
+    <div class="btn-group" style="margin-top:50px;">
+      <a href="#" class="btn btn-gold">Upgrade to Premium</a>
+      <button onclick="showPage('mainPage')" class="btn btn-outline-gold">Back to Free Version</button>
+    </div>
+
+    <footer>
+      © 2026 Nexus Premium. Elite Discord Solutions.
+    </footer>
+  </div>
+</div>
+
+<script>
+  function showPage(pageId){
+    document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('page-active'));
+    document.getElementById(pageId).classList.add('page-active');
+    window.scrollTo(0,0);
+  }
+
+  const canvas=document.getElementById('snowCanvas');
+  const ctx=canvas.getContext('2d');
+  let particles=[];
+
+  function resize(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle{constructor(){this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*2+1; this.speedY=Math.random()*0.6+0.2; this.opacity=Math.random()*0.5+0.1;}
+  update(){this.y+=this.speedY; if(this.y>canvas.height) this.y=-10;}
+  draw(){ctx.fillStyle=`rgba(0,210,255,${this.opacity})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}
+  }
+
+  for(let i=0;i<70;i++)particles.push(new Particle());
+
+  function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animate);}
+  animate();
+
+  document.querySelectorAll('.stat-value').forEach(el=>{
+    const target=+el.dataset.target; let current=0;
+    const step=Math.max(1, Math.floor(target/80));
+    const interval=setInterval(()=>{
+      current+=step;
+      if(current>=target){current=target; clearInterval(interval);}
+      el.textContent=current.toLocaleString();
+    },20);
+  });
+</script>
+
+</body>
+</html>
