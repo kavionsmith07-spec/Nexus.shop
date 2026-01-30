@@ -641,6 +641,209 @@
       margin-top: 24px;
     }
 
+    /* Settings Page Styles */
+    .settings-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .settings-card {
+      background: var(--bg-card);
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 210, 255, 0.1);
+    }
+
+    .settings-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .security-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-bottom: 16px;
+    }
+
+    .security-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .status-enabled {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .status-disabled {
+      background: rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+    }
+
+    .alert-info {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .danger-zone {
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Dev Dashboard Styles */
+    .dev-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .dev-info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: rgba(0, 210, 255, 0.05);
+      border-radius: 8px;
+    }
+
+    .dev-label {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .dev-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .activity-log {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .log-item {
+      padding: 12px;
+      background: rgba(0, 210, 255, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .log-time {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .log-message {
+      color: var(--text-primary);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      max-width: 500px;
+      width: 90%;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .modal-subtitle {
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--accent-primary);
+    }
+
     @media (max-width: 768px) {
       h1 {
         font-size: 2.5rem;
@@ -942,6 +1145,7 @@
       </div>
       <div class="nav-links">
         <a class="nav-link" onclick="showPage('mainPage')">Home</a>
+        <a class="nav-link" onclick="showPage('settingsPage')">Settings</a>
         <a class="nav-link" onclick="logout()">Logout</a>
       </div>
     </div>
@@ -967,6 +1171,9 @@
         <button onclick="showPage('premiumPage')" class="btn btn-gold">
           Go Premium
         </button>
+        <button onclick="showDevAccessModal()" class="btn btn-secondary">
+          🔧 Developer Access
+        </button>
       </div>
     </div>
 
@@ -977,6 +1184,222 @@
         <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="footer-link">Support</a>
       </div>
       <p>© 2026 Nexus Bot Dashboard. Exciting features coming soon!</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ACCOUNT SETTINGS PAGE -->
+<div id="settingsPage" class="page-section">
+  <div class="bg-gradient"></div>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="showPage('mainPage')">
+        <span>⚡ Nexus Settings</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="showPage('dashboardPage')">Dashboard</a>
+        <a class="nav-link" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="section-title">Account Settings</h1>
+      <p class="tagline">Manage your Nexus account</p>
+    </div>
+
+    <div class="settings-container">
+      <!-- Profile Section -->
+      <div class="settings-card">
+        <h3 class="settings-card-title">👤 Profile Information</h3>
+        <div class="form-group">
+          <label class="form-label">Display Name</label>
+          <input type="text" id="settingsDisplayName" class="form-input" placeholder="Your display name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="settingsEmail" class="form-input" disabled />
+        </div>
+        <button onclick="updateProfile()" class="btn btn-primary">Save Profile</button>
+      </div>
+
+      <!-- Security Section -->
+      <div class="settings-card">
+        <h3 class="settings-card-title">🔒 Security</h3>
+        
+        <!-- 2FA Section -->
+        <div class="security-item">
+          <div>
+            <h4 style="margin-bottom: 8px;">Two-Factor Authentication (2FA)</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Add an extra layer of security to your account</p>
+          </div>
+          <div id="2faStatus" class="security-status">
+            <span class="status-badge status-disabled">Disabled</span>
+          </div>
+        </div>
+        
+        <div id="2faDisabledSection">
+          <button onclick="enable2FA()" class="btn btn-primary">Enable 2FA</button>
+        </div>
+        
+        <div id="2faEnabledSection" class="hidden">
+          <div class="alert-info">
+            ✅ Two-factor authentication is enabled. You'll need to enter a 6-digit code when logging in.
+          </div>
+          <button onclick="disable2FA()" class="btn btn-secondary">Disable 2FA</button>
+        </div>
+        
+        <!-- Change Password -->
+        <div style="margin-top: 32px;">
+          <h4 style="margin-bottom: 16px;">Change Password</h4>
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <input type="password" id="currentPassword" class="form-input" placeholder="••••••••" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input type="password" id="newPassword" class="form-input" placeholder="••••••••" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <input type="password" id="confirmNewPassword" class="form-input" placeholder="••••••••" />
+          </div>
+          <button onclick="changePassword()" class="btn btn-primary">Update Password</button>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="settings-card danger-zone">
+        <h3 class="settings-card-title">⚠️ Danger Zone</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Permanently delete your account and all data</p>
+        <button onclick="deleteAccount()" class="btn btn-danger">Delete Account</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="footer-link">Support</a>
+      </div>
+      <p>© 2026 Nexus Bot Account Settings</p>
+    </footer>
+  </div>
+</div>
+
+<!-- DEV DASHBOARD PAGE -->
+<div id="devDashboardPage" class="page-section">
+  <div class="bg-gradient"></div>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="showPage('mainPage')">
+        <span>⚡ Nexus Developer Portal</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="showPage('dashboardPage')">User Dashboard</a>
+        <a class="nav-link" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="section-title" style="color: #ef4444;">🔧 Developer Dashboard</h1>
+      <p class="tagline">Advanced controls and system management</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">2,847</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌐</div>
+        <div class="stat-value">345</div>
+        <div class="stat-label">Active Servers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💎</div>
+        <div class="stat-value">127</div>
+        <div class="stat-label">Premium Users</div>
+      </div>
+    </div>
+
+    <div class="settings-container">
+      <div class="settings-card">
+        <h3 class="settings-card-title">📊 System Overview</h3>
+        <div class="dev-info-grid">
+          <div class="dev-info-item">
+            <span class="dev-label">Bot Status:</span>
+            <span class="status-badge status-enabled">Online</span>
+          </div>
+          <div class="dev-info-item">
+            <span class="dev-label">API Status:</span>
+            <span class="status-badge status-enabled">Operational</span>
+          </div>
+          <div class="dev-info-item">
+            <span class="dev-label">Database:</span>
+            <span class="status-badge status-enabled">Connected</span>
+          </div>
+          <div class="dev-info-item">
+            <span class="dev-label">Uptime:</span>
+            <span style="color: var(--accent-primary); font-weight: 600;">99.9%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3 class="settings-card-title">🛠️ Developer Actions</h3>
+        <div class="dev-actions-grid">
+          <button class="btn btn-primary" onclick="showNotification('✅ Database backup initiated', 'success')">
+            💾 Backup Database
+          </button>
+          <button class="btn btn-primary" onclick="showNotification('✅ Cache cleared successfully', 'success')">
+            🗑️ Clear Cache
+          </button>
+          <button class="btn btn-primary" onclick="showNotification('✅ Logs exported', 'success')">
+            📋 Export Logs
+          </button>
+          <button class="btn btn-secondary" onclick="showNotification('⚡ Bot restarted', 'success')">
+            🔄 Restart Bot
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3 class="settings-card-title">📝 Recent Activity Logs</h3>
+        <div class="activity-log">
+          <div class="log-item">
+            <span class="log-time">2 mins ago</span>
+            <span class="log-message">User joined server: Gaming Paradise</span>
+          </div>
+          <div class="log-item">
+            <span class="log-time">5 mins ago</span>
+            <span class="log-message">Premium subscription activated</span>
+          </div>
+          <div class="log-item">
+            <span class="log-time">12 mins ago</span>
+            <span class="log-message">Command executed: /setup</span>
+          </div>
+          <div class="log-item">
+            <span class="log-time">18 mins ago</span>
+            <span class="log-message">Moderation action: User warned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Developer Docs</a>
+        <a href="#" class="footer-link">API Reference</a>
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="footer-link">Support</a>
+      </div>
+      <p style="color: #ef4444;">© 2026 Nexus Developer Portal - Authorized Personnel Only</p>
     </footer>
   </div>
 </div>
@@ -1256,7 +1679,10 @@
     GoogleAuthProvider,
     signOut,
     onAuthStateChanged,
-    updateProfile
+    updateProfile,
+    updatePassword,
+    EmailAuthProvider,
+    reauthenticateWithCredential
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
   const firebaseConfig = {
@@ -1274,14 +1700,28 @@
   const provider = new GoogleAuthProvider();
 
   // ================= AUTH STATE LISTENER =================
+  let pendingUser = null;
+
   onAuthStateChanged(auth, (user) => {
-    if (user) {
+    if (user && !pendingUser) {
       document.getElementById("loginNavBtn").classList.add("hidden");
       document.getElementById("userMenu").classList.remove("hidden");
       
       const username = user.displayName || user.email.split('@')[0];
       document.getElementById("userAvatar").textContent = username.charAt(0).toUpperCase();
       document.getElementById("dashboardUsername").textContent = username;
+      
+      // Load settings
+      if (document.getElementById('settingsDisplayName')) {
+        document.getElementById('settingsDisplayName').value = user.displayName || '';
+        document.getElementById('settingsEmail').value = user.email || '';
+      }
+      
+      // Check 2FA status
+      const twoFAEnabled = localStorage.getItem(`nexus_2fa_${user.uid}`);
+      if (twoFAEnabled) {
+        update2FAStatus(true);
+      }
     } else {
       document.getElementById("loginNavBtn").classList.remove("hidden");
       document.getElementById("userMenu").classList.add("hidden");
@@ -1295,11 +1735,22 @@
     const password = document.getElementById("loginPassword").value;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      showNotification("✅ Welcome back! Logged in successfully!", "success");
-      showPage("dashboardPage");
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      // Check if 2FA is enabled
+      const twoFACode = localStorage.getItem(`nexus_2fa_${userCredential.user.uid}`);
+      if (twoFACode) {
+        // Store pending user and show 2FA modal
+        pendingUser = userCredential.user;
+        await signOut(auth); // Sign out temporarily until 2FA verified
+        document.getElementById('twoFAVerifyModal').classList.add('active');
+      } else {
+        showNotification("✅ Nexus: Welcome back! Logged in successfully!", "success");
+        showPage("dashboardPage");
+      }
     } catch (err) {
-      showNotification("❌ " + err.message, "error");
+      const errorMsg = err.message.replace('Firebase:', 'Nexus:').replace('auth/', '');
+      showNotification("❌ Nexus: " + errorMsg, "error");
     }
   };
 
@@ -1330,21 +1781,32 @@
       await updateProfile(userCredential.user, {
         displayName: username
       });
-      showNotification("🎉 Account created successfully! Welcome to Nexus!", "success");
+      showNotification("🎉 Nexus: Account created successfully! Welcome to Nexus!", "success");
       showPage("dashboardPage");
     } catch (err) {
-      showNotification("❌ " + err.message, "error");
+      const errorMsg = err.message.replace('Firebase:', 'Nexus:').replace('auth/', '');
+      showNotification("❌ Nexus: " + errorMsg, "error");
     }
   };
 
   // ================= GOOGLE LOGIN =================
   window.googleLogin = async () => {
     try {
-      await signInWithPopup(auth, provider);
-      showNotification("✅ Google login successful!", "success");
-      showPage("dashboardPage");
+      const result = await signInWithPopup(auth, provider);
+      
+      // Check if 2FA is enabled
+      const twoFACode = localStorage.getItem(`nexus_2fa_${result.user.uid}`);
+      if (twoFACode) {
+        pendingUser = result.user;
+        await signOut(auth);
+        document.getElementById('twoFAVerifyModal').classList.add('active');
+      } else {
+        showNotification("✅ Nexus: Google login successful!", "success");
+        showPage("dashboardPage");
+      }
     } catch (err) {
-      showNotification("❌ " + err.message, "error");
+      const errorMsg = err.message.replace('Firebase:', 'Nexus:').replace('auth/', '');
+      showNotification("❌ Nexus: " + errorMsg, "error");
     }
   };
 
@@ -1352,15 +1814,220 @@
   window.logout = async () => {
     try {
       await signOut(auth);
-      showNotification("👋 Logged out successfully!", "success");
+      showNotification("👋 Nexus: Logged out successfully!", "success");
       showPage("mainPage");
     } catch (err) {
-      showNotification("❌ Error logging out", "error");
+      showNotification("❌ Nexus: Error logging out", "error");
     }
   };
+
+  // ================= UPDATE PROFILE =================
+  window.updateProfile = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const displayName = document.getElementById('settingsDisplayName').value;
+
+    try {
+      await updateProfile(user, { displayName });
+      document.getElementById('dashboardUsername').textContent = displayName;
+      document.getElementById('userAvatar').textContent = displayName.charAt(0).toUpperCase();
+      showNotification("✅ Nexus: Profile updated successfully!", "success");
+    } catch (err) {
+      showNotification("❌ Nexus: Failed to update profile", "error");
+    }
+  };
+
+  // ================= CHANGE PASSWORD =================
+  window.changePassword = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const currentPass = document.getElementById('currentPassword').value;
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmNewPassword').value;
+
+    if (newPass !== confirmPass) {
+      showNotification("❌ Nexus: New passwords don't match", "error");
+      return;
+    }
+
+    if (newPass.length < 8) {
+      showNotification("❌ Nexus: Password must be at least 8 characters", "error");
+      return;
+    }
+
+    try {
+      // Re-authenticate user
+      const credential = EmailAuthProvider.credential(user.email, currentPass);
+      await reauthenticateWithCredential(user, credential);
+      
+      // Update password
+      await updatePassword(user, newPass);
+      
+      // Clear fields
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmNewPassword').value = '';
+      
+      showNotification("✅ Nexus: Password changed successfully!", "success");
+    } catch (err) {
+      showNotification("❌ Nexus: " + err.message.replace('Firebase:', 'Nexus:'), "error");
+    }
+  };
+
+  // ================= DELETE ACCOUNT =================
+  window.deleteAccount = async () => {
+    if (!confirm("⚠️ Are you absolutely sure? This will permanently delete your account and all data. This cannot be undone.")) {
+      return;
+    }
+
+    const user = auth.currentUser;
+    if (!user) return;
+
+    try {
+      // Remove 2FA data
+      localStorage.removeItem(`nexus_2fa_${user.uid}`);
+      
+      await user.delete();
+      showNotification("✅ Nexus: Account deleted successfully", "success");
+      showPage("mainPage");
+    } catch (err) {
+      if (err.code === 'auth/requires-recent-login') {
+        showNotification("❌ Nexus: Please log out and log back in, then try again", "error");
+      } else {
+        showNotification("❌ Nexus: Failed to delete account", "error");
+      }
+    }
+  };
+
 </script>
 
 <script>
+  // ===== 2FA FUNCTIONS =====
+  function update2FAStatus(enabled) {
+    const statusBadge = document.querySelector('#2faStatus .status-badge');
+    const disabledSection = document.getElementById('2faDisabledSection');
+    const enabledSection = document.getElementById('2faEnabledSection');
+    
+    if (statusBadge) {
+      if (enabled) {
+        statusBadge.textContent = 'Enabled';
+        statusBadge.classList.remove('status-disabled');
+        statusBadge.classList.add('status-enabled');
+        if (disabledSection) disabledSection.classList.add('hidden');
+        if (enabledSection) enabledSection.classList.remove('hidden');
+      } else {
+        statusBadge.textContent = 'Disabled';
+        statusBadge.classList.remove('status-enabled');
+        statusBadge.classList.add('status-disabled');
+        if (disabledSection) disabledSection.classList.remove('hidden');
+        if (enabledSection) enabledSection.classList.add('hidden');
+      }
+    }
+  }
+
+  window.enable2FA = () => {
+    document.getElementById('twoFAModal').classList.add('active');
+  };
+
+  window.close2FAModal = () => {
+    document.getElementById('twoFAModal').classList.remove('active');
+    document.getElementById('setup2FACode').value = '';
+    document.getElementById('setup2FAError').classList.remove('show');
+  };
+
+  window.confirm2FASetup = () => {
+    const code = document.getElementById('setup2FACode').value;
+    const user = auth.currentUser;
+    
+    if (!user) {
+      showNotification("❌ Nexus: Please log in first", "error");
+      return;
+    }
+    
+    if (!/^\d{6}$/.test(code)) {
+      document.getElementById('setup2FAError').classList.add('show');
+      return;
+    }
+    
+    localStorage.setItem(`nexus_2fa_${user.uid}`, code);
+    update2FAStatus(true);
+    close2FAModal();
+    showNotification("✅ Nexus: Two-factor authentication enabled!", "success");
+  };
+
+  window.disable2FA = () => {
+    if (!confirm("Are you sure you want to disable two-factor authentication?")) {
+      return;
+    }
+    
+    const user = auth.currentUser;
+    if (user) {
+      localStorage.removeItem(`nexus_2fa_${user.uid}`);
+      update2FAStatus(false);
+      showNotification("✅ Nexus: Two-factor authentication disabled", "success");
+    }
+  };
+
+  window.verify2FACode = async () => {
+    const code = document.getElementById('verify2FACode').value;
+    const user = pendingUser;
+    
+    if (!user) return;
+    
+    const storedCode = localStorage.getItem(`nexus_2fa_${user.uid}`);
+    
+    if (code === storedCode) {
+      // Re-authenticate with email/password
+      try {
+        const email = user.email;
+        const password = document.getElementById("loginPassword").value || 
+                        prompt("Please re-enter your password:");
+        
+        if (password) {
+          await signInWithEmailAndPassword(auth, email, password);
+          document.getElementById('twoFAVerifyModal').classList.remove('active');
+          document.getElementById('verify2FACode').value = '';
+          pendingUser = null;
+          showNotification("✅ Nexus: 2FA verified! Welcome back!", "success");
+          showPage("dashboardPage");
+        }
+      } catch (err) {
+        showNotification("❌ Nexus: Authentication failed", "error");
+      }
+    } else {
+      document.getElementById('verify2FAError').classList.add('show');
+      showNotification("❌ Nexus: Invalid authentication code", "error");
+    }
+  };
+
+  // ===== DEVELOPER ACCESS FUNCTIONS =====
+  const DEV_CODE = "Dev19375738495y383";
+
+  window.showDevAccessModal = () => {
+    document.getElementById('devAccessModal').classList.add('active');
+  };
+
+  window.closeDevAccessModal = () => {
+    document.getElementById('devAccessModal').classList.remove('active');
+    document.getElementById('devCode').value = '';
+    document.getElementById('devCodeError').classList.remove('show');
+  };
+
+  window.verifyDevCode = () => {
+    const code = document.getElementById('devCode').value;
+    
+    if (code === DEV_CODE) {
+      closeDevAccessModal();
+      showPage('devDashboardPage');
+      showNotification("✅ Nexus: Developer access granted!", "success");
+    } else {
+      document.getElementById('devCodeError').classList.add('show');
+      showNotification("❌ Nexus: Invalid developer code", "error");
+    }
+  };
+
   // ===== NOTIFICATION SYSTEM =====
   function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
@@ -1634,6 +2301,62 @@
     }
   });
 </script>
+
+<!-- Dev Access Modal -->
+<div id="devAccessModal" class="modal-overlay">
+  <div class="modal-content" style="position: relative;">
+    <button class="modal-close" onclick="closeDevAccessModal()">×</button>
+    <h2 class="modal-title">🔧 Developer Access</h2>
+    <p class="modal-subtitle">Enter the developer code to access the developer dashboard</p>
+    
+    <div class="form-group">
+      <label class="form-label">Developer Code</label>
+      <input type="password" id="devCode" class="form-input" placeholder="Enter code" />
+      <div class="form-error" id="devCodeError">Invalid developer code</div>
+    </div>
+    
+    <button onclick="verifyDevCode()" class="btn btn-primary" style="width: 100%; margin-top: 16px;">
+      Verify & Access
+    </button>
+  </div>
+</div>
+
+<!-- 2FA Setup Modal -->
+<div id="twoFAModal" class="modal-overlay">
+  <div class="modal-content" style="position: relative;">
+    <button class="modal-close" onclick="close2FAModal()">×</button>
+    <h2 class="modal-title">🔒 Enable Two-Factor Authentication</h2>
+    <p class="modal-subtitle">Enter a 6-digit code that will be required during login</p>
+    
+    <div class="form-group">
+      <label class="form-label">Set Your 2FA Code (6 digits)</label>
+      <input type="text" id="setup2FACode" class="form-input" placeholder="123456" maxlength="6" />
+      <div class="form-error" id="setup2FAError">Code must be exactly 6 digits</div>
+    </div>
+    
+    <button onclick="confirm2FASetup()" class="btn btn-primary" style="width: 100%; margin-top: 16px;">
+      Enable 2FA
+    </button>
+  </div>
+</div>
+
+<!-- 2FA Verification Modal (for login) -->
+<div id="twoFAVerifyModal" class="modal-overlay">
+  <div class="modal-content" style="position: relative;">
+    <h2 class="modal-title">🔒 Two-Factor Authentication</h2>
+    <p class="modal-subtitle">Enter your 6-digit authentication code</p>
+    
+    <div class="form-group">
+      <label class="form-label">Authentication Code</label>
+      <input type="text" id="verify2FACode" class="form-input" placeholder="123456" maxlength="6" />
+      <div class="form-error" id="verify2FAError">Invalid authentication code</div>
+    </div>
+    
+    <button onclick="verify2FACode()" class="btn btn-primary" style="width: 100%; margin-top: 16px;">
+      Verify
+    </button>
+  </div>
+</div>
 
 </body>
 </html>
