@@ -27,6 +27,7 @@
       --gold-dark: #d4af37;
       --gold-glow: rgba(245, 201, 122, 0.3);
       --success: #22c55e;
+      --error: #ef4444;
       --border: rgba(255, 255, 255, 0.08);
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
       --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
@@ -43,7 +44,6 @@
     body, html {
       width: 100%;
       min-height: 100vh;
-      /* Fix for mobile browsers with address bars */
       min-height: -webkit-fill-available;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       overflow-x: hidden;
@@ -129,6 +129,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
 
     .nav-logo-icon {
@@ -172,6 +173,29 @@
     .nav-link-premium:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 24px var(--gold-glow);
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-avatar:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
     /* Container */
@@ -340,6 +364,200 @@
     .btn-outline-gold:hover {
       background: rgba(245, 201, 122, 0.1);
       transform: translateY(-2px);
+    }
+
+    /* Auth Forms */
+    .auth-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 40px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent-primary), var(--text-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .auth-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-error {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .auth-divider {
+      text-align: center;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth-divider::before {
+      left: 0;
+    }
+
+    .auth-divider::after {
+      right: 0;
+    }
+
+    .auth-link {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .auth-link a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .auth-link a:hover {
+      color: var(--accent-secondary);
+    }
+
+    /* Dashboard */
+    .dashboard-header {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .dashboard-welcome {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--text-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .coming-soon-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      padding: 80px 40px;
+      border-radius: 24px;
+      border: 2px dashed var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming-soon-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, var(--accent-glow), transparent);
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .coming-soon-icon {
+      font-size: 5rem;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 30px var(--accent-glow));
+      position: relative;
+      z-index: 1;
+    }
+
+    .coming-soon-title {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .coming-soon-text {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
 
     /* Stats */
@@ -664,6 +882,31 @@
       color: var(--accent-primary);
     }
 
+    /* Utility classes */
+    .gold-text {
+      color: var(--gold);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-2 {
+      margin-bottom: 8px;
+    }
+
+    .mb-4 {
+      margin-bottom: 16px;
+    }
+
+    .mt-4 {
+      margin-top: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .nav-inner {
@@ -694,192 +937,17 @@
         padding: 40px 16px;
       }
 
-      .hero {
-        margin-bottom: 60px;
+      .auth-container {
+        padding: 24px 20px;
       }
 
-      .logo-img {
-        width: 100px;
-        height: 100px;
-      }
-
-      h1 {
-        font-size: 2rem;
-        letter-spacing: -1px;
-      }
-
-      .tagline {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-
-      .btn-group {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 24px;
-        font-size: 0.95rem;
-      }
-
-      .stats-grid,
-      .features-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .stat-card {
-        padding: 24px 16px;
-      }
-
-      .stat-value {
-        font-size: 2.5rem;
-      }
-
-      .stat-icon {
+      .coming-soon-title {
         font-size: 2rem;
       }
 
-      .section-title {
-        font-size: 1.8rem;
+      .coming-soon-icon {
+        font-size: 3.5rem;
       }
-
-      .section-subtitle {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-
-      .feature-card,
-      .premium-card {
-        padding: 24px;
-      }
-
-      .feature-icon,
-      .premium-icon {
-        font-size: 2.5rem;
-      }
-
-      .feature-title,
-      .premium-title {
-        font-size: 1.1rem;
-      }
-
-      .reviews-section {
-        padding: 30px 16px;
-      }
-
-      .review-form {
-        padding: 20px;
-      }
-
-      .star-rating {
-        font-size: 1.5rem;
-      }
-
-      textarea {
-        font-size: 0.95rem;
-        padding: 12px;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      footer {
-        padding: 40px 16px 30px;
-        font-size: 0.85rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-logo {
-        font-size: 1rem;
-      }
-
-      .nav-link {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-      }
-
-      .nav-link-premium {
-        padding: 8px 14px !important;
-        font-size: 0.8rem;
-      }
-
-      h1 {
-        font-size: 1.75rem;
-      }
-
-      .tagline {
-        font-size: 0.95rem;
-      }
-
-      .logo-img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .stat-value {
-        font-size: 2rem;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-      }
-
-      .section-subtitle {
-        font-size: 0.9rem;
-      }
-
-      .btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-      }
-    }
-
-    /* Disable hover effects on touch devices */
-    @media (hover: none) and (pointer: coarse) {
-      .stat-card:hover,
-      .feature-card:hover,
-      .premium-card:hover {
-        transform: none;
-      }
-
-      .btn:hover {
-        transform: none;
-      }
-
-      .btn-primary:hover,
-      .btn-gold:hover,
-      .nav-link-premium:hover {
-        transform: none;
-      }
-    }
-
-    /* Utility classes */
-    .gold-text {
-      color: var(--gold);
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .mb-2 {
-      margin-bottom: 8px;
-    }
-
-    .mb-4 {
-      margin-bottom: 16px;
-    }
-
-    .mt-4 {
-      margin-top: 16px;
     }
   </style>
 </head>
@@ -892,7 +960,7 @@
   
   <nav class="nav">
     <div class="nav-inner">
-      <div class="nav-logo">
+      <div class="nav-logo" onclick="showPage('mainPage')">
         <span>⚡ Nexus</span>
       </div>
       <div class="nav-links">
@@ -901,6 +969,10 @@
         <a class="nav-link nav-link-premium" onclick="showPage('premiumPage')">
           ✨ Go Premium
         </a>
+        <a class="nav-link" id="loginNavBtn" onclick="showPage('loginPage')">Login</a>
+        <div class="user-menu hidden" id="userMenu">
+          <div class="user-avatar" onclick="showPage('dashboardPage')" id="userAvatar"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -1025,13 +1097,168 @@
   </div>
 </div>
 
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="page-section">
+  <div class="bg-gradient"></div>
+  <canvas id="particlesCanvas2"></canvas>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="showPage('mainPage')">
+        <span>⚡ Nexus</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="showPage('mainPage')">Home</a>
+        <a class="nav-link" onclick="showPage('signupPage')">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="auth-container">
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Login to access your Nexus dashboard</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="your@email.com" required />
+          <div class="form-error" id="loginEmailError">Please enter a valid email</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required />
+          <div class="form-error" id="loginPasswordError">Password is required</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          🚀 Login
+        </button>
+      </form>
+
+      <div class="auth-link">
+        Don't have an account? <a href="#" onclick="showPage('signupPage')">Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGN UP PAGE -->
+<div id="signupPage" class="page-section">
+  <div class="bg-gradient"></div>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="showPage('mainPage')">
+        <span>⚡ Nexus</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="showPage('mainPage')">Home</a>
+        <a class="nav-link" onclick="showPage('loginPage')">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="auth-container">
+      <h2 class="auth-title">Join Nexus</h2>
+      <p class="auth-subtitle">Create your account to get started</p>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required />
+          <div class="form-error" id="signupUsernameError">Username must be at least 3 characters</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="your@email.com" required />
+          <div class="form-error" id="signupEmailError">Please enter a valid email</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required />
+          <div class="form-error" id="signupPasswordError">Password must be at least 8 characters</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" class="form-input" placeholder="••••••••" required />
+          <div class="form-error" id="signupConfirmPasswordError">Passwords don't match</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          ✨ Create Account
+        </button>
+      </form>
+
+      <div class="auth-link">
+        Already have an account? <a href="#" onclick="showPage('loginPage')">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD PAGE -->
+<div id="dashboardPage" class="page-section">
+  <div class="bg-gradient"></div>
+  
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="showPage('mainPage')">
+        <span>⚡ Nexus Dashboard</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="showPage('mainPage')">Home</a>
+        <a class="nav-link" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="dashboard-welcome">Welcome, <span id="dashboardUsername">User</span>!</h1>
+      <p class="tagline">Your Nexus control center</p>
+    </div>
+
+    <div class="coming-soon-card">
+      <div class="coming-soon-icon">🚀</div>
+      <h2 class="coming-soon-title">Coming Soon to Nexus</h2>
+      <p class="coming-soon-text">
+        We're building something amazing! The Nexus dashboard will soon feature server management, 
+        analytics, custom commands, moderation controls, and much more. Stay tuned for updates!
+      </p>
+      <div class="btn-group" style="margin-top: 40px;">
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="btn btn-primary">
+          Join Our Discord
+        </a>
+        <button onclick="showPage('premiumPage')" class="btn btn-gold">
+          Go Premium
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="https://discord.gg/npDMhXj5sV" target="_blank" class="footer-link">Support</a>
+      </div>
+      <p>© 2026 Nexus Bot Dashboard. Exciting features coming soon!</p>
+    </footer>
+  </div>
+</div>
+
 <!-- FEATURES PAGE -->
 <div id="featuresPage" class="page-section">
   <div class="bg-gradient"></div>
   
   <nav class="nav">
     <div class="nav-inner">
-      <div class="nav-logo">
+      <div class="nav-logo" onclick="showPage('mainPage')">
         <span>⚡ Nexus Features</span>
       </div>
       <div class="nav-links">
@@ -1139,7 +1366,7 @@
   
   <nav class="nav" style="background: rgba(15, 12, 6, 0.8); border-bottom: 1px solid rgba(245, 201, 122, 0.2);">
     <div class="nav-inner">
-      <div class="nav-logo gold-text">
+      <div class="nav-logo gold-text" onclick="showPage('mainPage')">
         <span>👑 Nexus Premium</span>
       </div>
       <div class="nav-links">
@@ -1290,6 +1517,165 @@
 </div>
 
 <script>
+  // ===== AUTH STATE MANAGEMENT =====
+  let currentUser = null;
+
+  function checkAuth() {
+    const savedUser = localStorage.getItem('nexusUser');
+    if (savedUser) {
+      currentUser = JSON.parse(savedUser);
+      updateUIForLoggedInUser();
+    }
+  }
+
+  function updateUIForLoggedInUser() {
+    document.getElementById('loginNavBtn').classList.add('hidden');
+    document.getElementById('userMenu').classList.remove('hidden');
+    document.getElementById('userAvatar').textContent = currentUser.username.charAt(0).toUpperCase();
+    document.getElementById('dashboardUsername').textContent = currentUser.username;
+  }
+
+  function updateUIForLoggedOutUser() {
+    document.getElementById('loginNavBtn').classList.remove('hidden');
+    document.getElementById('userMenu').classList.add('hidden');
+    currentUser = null;
+  }
+
+  function logout() {
+    localStorage.removeItem('nexusUser');
+    updateUIForLoggedOutUser();
+    showPage('mainPage');
+    showNotification('✅ Logged out successfully!', 'success');
+  }
+
+  // ===== FORM VALIDATION =====
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // Login Form
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    
+    let valid = true;
+    
+    if (!validateEmail(email)) {
+      document.getElementById('loginEmailError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('loginEmailError').classList.remove('show');
+    }
+    
+    if (password.length < 8) {
+      document.getElementById('loginPasswordError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('loginPasswordError').classList.remove('show');
+    }
+    
+    if (valid) {
+      // Check if user exists
+      const savedUser = localStorage.getItem('nexusUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        if (user.email === email && user.password === password) {
+          currentUser = user;
+          updateUIForLoggedInUser();
+          showPage('dashboardPage');
+          showNotification('🎉 Welcome back, ' + user.username + '!', 'success');
+        } else {
+          showNotification('❌ Invalid credentials', 'error');
+        }
+      } else {
+        showNotification('❌ No account found. Please sign up first.', 'error');
+      }
+    }
+  });
+
+  // Signup Form
+  document.getElementById('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('signupUsername').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    
+    let valid = true;
+    
+    if (username.length < 3) {
+      document.getElementById('signupUsernameError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('signupUsernameError').classList.remove('show');
+    }
+    
+    if (!validateEmail(email)) {
+      document.getElementById('signupEmailError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('signupEmailError').classList.remove('show');
+    }
+    
+    if (password.length < 8) {
+      document.getElementById('signupPasswordError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('signupPasswordError').classList.remove('show');
+    }
+    
+    if (password !== confirmPassword) {
+      document.getElementById('signupConfirmPasswordError').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('signupConfirmPasswordError').classList.remove('show');
+    }
+    
+    if (valid) {
+      const user = {
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+      };
+      
+      localStorage.setItem('nexusUser', JSON.stringify(user));
+      currentUser = user;
+      updateUIForLoggedInUser();
+      showPage('dashboardPage');
+      showNotification('🎉 Account created successfully! Welcome to Nexus!', 'success');
+    }
+  });
+
+  // ===== NOTIFICATION SYSTEM =====
+  function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${type === 'success' ? 'linear-gradient(135deg, #22c55e, #16a34a)' : 'linear-gradient(135deg, #ef4444, #dc2626)'};
+      color: white;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 8px 32px ${type === 'success' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'};
+      z-index: 1000;
+      animation: slideIn 0.5s ease;
+      max-width: 350px;
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.5s ease';
+      setTimeout(() => notification.remove(), 500);
+    }, 3000);
+  }
+
   // ===== PAGE TRANSITIONS =====
   function showPage(pageId) {
     const sections = document.querySelectorAll('.page-section');
@@ -1390,7 +1776,6 @@
     });
   }
 
-  // Run on page load
   setTimeout(animateStats, 500);
 
   // ===== STAR RATING SYSTEM =====
@@ -1429,14 +1814,12 @@
   const reviewText = document.getElementById('reviewText');
   const reviewsList = document.getElementById('reviewsList');
 
-  // Load reviews from localStorage
   function loadReviews() {
     const savedReviews = localStorage.getItem('nexusReviews');
     if (savedReviews) {
       const reviews = JSON.parse(savedReviews);
       reviews.forEach(review => addReviewToDOM(review.text, review.rating, false));
     } else {
-      // Add some default reviews
       const defaultReviews = [
         { text: "Nexus Bot has completely transformed our server! The moderation features are top-notch and super easy to configure. Highly recommend! 🚀", rating: 5 },
         { text: "Great bot with excellent customer support. The premium features are definitely worth it for larger communities.", rating: 5 },
@@ -1489,38 +1872,27 @@
     const text = reviewText.value.trim();
     
     if (!text) {
-      alert('Please write a review before submitting.');
+      showNotification('❌ Please write a review before submitting.', 'error');
       return;
     }
     
     if (selectedRating === 0) {
-      alert('Please select a star rating.');
+      showNotification('❌ Please select a star rating.', 'error');
       return;
     }
     
     addReviewToDOM(text, selectedRating);
     
-    // Reset form
     reviewText.value = '';
     selectedRating = 0;
     updateStarDisplay(0, 'selected');
     
-    // Show success message
-    const successMsg = document.createElement('div');
-    successMsg.textContent = '✅ Thank you for your review!';
-    successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 16px 24px; border-radius: 12px; font-weight: 600; box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3); z-index: 1000; animation: slideIn 0.5s ease;';
-    document.body.appendChild(successMsg);
-    
-    setTimeout(() => {
-      successMsg.style.animation = 'slideOut 0.5s ease';
-      setTimeout(() => successMsg.remove(), 500);
-    }, 3000);
+    showNotification('✅ Thank you for your review!', 'success');
   });
 
-  // Load reviews on page load
   loadReviews();
 
-  // Add CSS animations for success message
+  // ===== CSS ANIMATIONS =====
   const style = document.createElement('style');
   style.textContent = `
     @keyframes slideIn {
@@ -1546,7 +1918,6 @@
   });
 
   // ===== PERFORMANCE OPTIMIZATION =====
-  // Pause particle animation when page is not visible
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(animationId);
@@ -1554,6 +1925,9 @@
       animateParticles();
     }
   });
+
+  // ===== INITIALIZE ON LOAD =====
+  checkAuth();
 </script>
 
 </body>
